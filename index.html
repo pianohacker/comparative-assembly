@@ -1,49 +1,218 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+        <title>Comparative Assembly</title>
 
-		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/monokai.css">
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/monokai.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
 
-		<script src="js/reveal.js"></script>
+        <style>
+.red { color: #FF8888; }
+.green { color: #88FF88; }
+.blue { color: #8888FF; }
+.faded { opacity: .2; }
+.unfade { opacity: 1; }
+.reveal .stretch ul { display: block; }
+.reveal .small { font-size: 0.6em; }
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section data-markdown>
+                    <textarea data-template>
+                        # Comparative Assembly
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        * Assuming basic familiarity of C/C++
+                        * But not assembly <!-- .element: class="fragment" -->
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        ## Assembly in not nearly enough time
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true }
-				]
-			});
-		</script>
-	</body>
+                        * Text version of machine code
+                        * One h*eckin instruction after another <!-- .element: class="fragment" -->
+                        * Each operation works on memory, registers, or immediate data <!-- .element: class="fragment" -->
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        ## 30,000 foot view
+
+                        X86-64 is a <span class="red">64-bit</span>, <span class="green">CISC</span>, <span class="blue">variable length</span> ISA.
+
+                        ARM64 is a <span class="red">64-bit</span>, <span class="green">RISC</span>, <span class="blue">fixed-length</span> ISA.
+                        
+                        Each *ISA* (Instruction Set Architecture) will have different registers, instructions, and encodings for those instructions.
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        X86-64 is <span class="faded">a </span><span class="red">64-bit</span><span class="faded">, <span class="green">CISC</span>, <span class="blue">variable length</span> ISA.</span>
+
+                        ARM64 is <span class="faded">a </span><span class="red">64-bit</span><span class="faded">, <span class="green">RISC</span>, <span class="blue">fixed-length</span> ISA.</span>
+
+                        <div class="stretch">
+                        A <span class="red">64-bit</span> ISA has two main features:
+
+                        Math with 64-bit numbers
+
+                        (max of 18 quintillion vs 4 billion)
+                        <!-- .element: class="small" -->
+
+                        Accessing 2<sup>64</sup> bytes worth of memory
+                        
+                        (4 GiB vs 16 EiB)
+                        <!-- .element: class="small" -->
+                        </div>
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        X86-64 is <span class="faded">a <span class="red">64-bit</span>, </span><span class="green">CISC</span><span class="faded">, <span class="blue">variable length</span> ISA.</span>
+
+                        <span class="green small">Complex Instruction Set Computer</span>
+                        
+                        <span class="small">many instructions, which do a lot of work, and fewer registers</span>
+
+                        ARM64 is <span class="faded">a <span class="red">64-bit</span>, </span><span class="green">RISC</span><span class="faded">, <span class="blue">fixed-length</span> ISA.</span>
+
+                        <span class="green small">Reduced Instruction Set Computer</span>
+                        
+                        <span class="small">fewer instructions, which do a small chunk of work, and many registers </span>
+                        </div>
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        X86-64 is <span class="faded">a <span class="red">64-bit</span>, <span class="green">CISC</span>, </span><span class="blue">variable length</span><span class="faded"> ISA.</span>
+
+                        <div class="small">The binary representation of each instruction varies in length.</div>
+
+                        ARM64 is <span class="faded">a <span class="red">64-bit</span>, <span class="green">RISC</span>, </span><span class="blue">fixed-length</span><span class="faded"> ISA.</span>
+
+                        <div class="small">Each instruction's encoding is exactly the same length.</div>
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        ## DEMO
+
+                        <iframe class="stretch" data-preload data-src="https://godbolt.org/embed-ro#g:!((g:!((g:!((h:codeEditor,i:(j:1,lang:___c,source:'int+mul(int+x,+int+y)+%7B%0A++++return+x+*+y%3B%0A%7D%0A%0Adouble+fmul(double+x,+double+y)+%7B%0A++++return+x+*+y%3B%0A%7D%0A%0Aint+square(int+x)+%7B%0A++++return+mul(x,+x)%3B%0A%7D%0A%0Aint+first()+%7B%0A++++int+a,+b%3B%0A++++a%3D1%3B%0A++++b%3D2%3B%0A%0A++++second()%3B%0A%0A++++return+3%3B%0A%7D%0A%0Aint+second()+%7B%0A++++int+c,+d%3B%0A++++c+%3D+4%3B%0A++++d+%3D+5%3B%0A%0A++++return+6%3B%0A%7D%0A'),l:'5',n:'0',o:'C+source+%231',t:'0')),k:50,l:'4',m:21.03174603174603,n:'0',o:'',s:0,t:'0'),(g:!((g:!((h:compiler,i:(compiler:cclang800,filters:(b:'0',binary:'0',commentOnly:'0',demangle:'0',directives:'0',execute:'1',intel:'1',libraryCode:'1',trim:'1'),lang:___c,libs:!(),options:'-O0',source:1),l:'5',n:'0',o:'x86-64+clang+8.0.0+(Editor+%231,+Compiler+%231)+C',t:'0')),header:(),k:50,l:'4',m:50,n:'0',o:'',s:0,t:'0'),(g:!((h:compiler,i:(compiler:carm64g820,filters:(b:'0',binary:'1',commentOnly:'0',demangle:'0',directives:'0',execute:'1',intel:'0',libraryCode:'1',trim:'1'),lang:___c,libs:!(),options:'-O0',source:1),l:'5',n:'0',o:'ARM64+gcc+8.2+(Editor+%231,+Compiler+%232)+C',t:'0')),header:(),k:50,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',m:78.96825396825396,n:'0',o:'',t:'0')),k:100,l:'3',n:'0',o:'',t:'0')),version:4"></iframe>
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        ## Registers
+
+                        | Purpose | ARM64 | X86-64 |
+                        | ------- | ----- | ------ |
+                        | 64-bit | `x0`-`x30` | `rax`-`rdx`, `rsi`, `rdi`, `r8-r15` |
+                        | 32-bit | `w0`-`w30` | `eax`-`edx`, `esi`, `edi` |
+                        | Special | `sp` | `rbp`, `rsp`, `rflags`, ... |
+                        | SIMD | `q0-q15`, `d0-d31` | `xmm0-xmm15`, `ymm0-ymm15`, `zmm0-zmm31` |
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        ## Stack
+
+                        <pre><code data-trim data-noescape>
+int first() { int a, b; second(); }
+int second() { int c, d; }
+                        </code></pre>
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        ## Stack
+
+                        <pre><code data-trim data-noescape>
+<mark>int first() { int a, b; second(); }</mark>
+int second() { int c, d; }
+                        </code></pre>
+                        
+
+                        | Memory |    |
+                        | ------ | -- |
+                        | a | &larr; stack pointer (`%rsp`, `sp`) |
+                        | b | |
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        ## Stack
+
+                        <pre><code data-trim data-noescape>
+int first() { int a, b; second(); }
+<mark>int second() { int c, d; }</mark>
+                        </code></pre>
+                        
+
+                        | Memory &darr; |    |
+                        | ------ | -- |
+                        | c | &larr; stack pointer (`%rsp`, `sp`) |
+                        | d | |
+                        | return address | &larr; saved stack pointer |
+                        | saved stack pointer | |
+                        | a | |
+                        | b | |
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        ## Resources
+
+                        <div class="stretch">
+
+                        * [ARM64 Reference](https://static.docs.arm.com/ddi0487/db/DDI0487D_b_armv8_arm.pdf?_ga=2.242224706.1748861683.1557376483-684752374.1557376483)
+                        * [ARM64 Calling Convention](http://infocenter.arm.com/help/topic/com.arm.doc.ihi0055b/IHI0055B_aapcs64.pdf)
+
+                        * [X86-64 Reference](https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf)
+                        * [Maximum length of an X86-64 instruction](https://stackoverflow.com/questions/14698350/x86-64-asm-maximum-bytes-for-an-instruction)
+
+                        </div>
+                    </textarea>
+                </section>
+            </div>
+        </div>
+
+        <script src="js/reveal.js"></script>
+
+        <script>
+            // More info about config & dependencies:
+            // - https://github.com/hakimel/reveal.js#configuration
+            // - https://github.com/hakimel/reveal.js#dependencies
+            Reveal.initialize({
+                hash: true,
+                transition: 'fade',
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js' },
+                    { src: 'plugin/markdown/markdown.js' },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: 'plugin/highlight/highlight.js', async: true }
+                ]
+            });
+        </script>
+    </body>
 </html>
